@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
+import StartCallModal from '../components/StartCallModal';
+import JoinCallModal from '../components/JoinCallModal';
 
 const quotes = [
   'Stay connected, no matter the distance.',
@@ -17,6 +19,8 @@ const quotes = [
 
 export default function HomeScreen({navigation}) {
   const [quoteIndex, setQuoteIndex] = useState(0);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isjoinModalVisible, setIsjoinModalVisible] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -24,6 +28,8 @@ export default function HomeScreen({navigation}) {
     }, 4000); // Change quote every 4 seconds
     return () => clearInterval(interval);
   }, []);
+
+  const channelCode = 'tet code';
 
   return (
     <SafeAreaView style={styles.container}>
@@ -41,11 +47,34 @@ export default function HomeScreen({navigation}) {
         <Text style={styles.quote}>{quotes[quoteIndex]}</Text>
       </View>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('CallScreen')}>
-        <Text style={styles.buttonText}>Start Call</Text>
-      </TouchableOpacity>
+      <View
+        style={{
+          flexDirection: 'row',
+          gap: 20,
+        }}>
+        <TouchableOpacity
+          style={styles.button}
+          // onPress={() => navigation.navigate('CallScreen', {channelCode})}
+          onPress={() => setIsModalVisible(true)}>
+          <Text style={styles.buttonText}>Start Call</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setIsjoinModalVisible(true)}>
+          <Text style={styles.buttonText}>Join Meet</Text>
+        </TouchableOpacity>
+      </View>
+      <StartCallModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        // onSubmit={handleStartCall}
+      />
+
+      <JoinCallModal
+        isVisible={isjoinModalVisible}
+        onClose={() => setIsjoinModalVisible(false)}
+        // onSubmit={handleStartCall}
+      />
     </SafeAreaView>
   );
 }
@@ -66,7 +95,6 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginBottom: 10,
-    // backgroundColor: 'red',
   },
   appName: {
     fontSize: 28,
@@ -87,9 +115,9 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#6A5AE0',
-    paddingVertical: 15,
-    paddingHorizontal: 40,
-    borderRadius: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
+    borderRadius: 20,
     elevation: 5,
   },
   buttonText: {

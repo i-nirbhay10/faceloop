@@ -1,29 +1,39 @@
-import {StyleSheet, Text, View} from 'react-native';
-import ZegoUIKitPrebuiltCall, {
-  GROUP_VOICE_CALL_CONFIG,
-} from '@zegocloud/zego-uikit-prebuilt-call-rn';
-import React from 'react';
+import React, {useState} from 'react';
+import AgoraUIKit from 'agora-rn-uikit';
+import {Text, View} from 'react-native';
+import {App_ID} from '@env';
 
-const CallScreen = () => {
-  randomUserID = String(Math.floor(Math.random() * 100000));
+const CallScreen = ({navigation, route}) => {
+  const [videoCall, setVideoCall] = useState(true);
+  // console.log(App_ID, 'App_ID');
+
+  const {channelCode} = route.params;
+  // console.log(channelCode, 'channelCode');
+
+  const connectionData = {
+    appId: `${App_ID}`,
+    channel: `${channelCode}`, // must be the same for both users
+  };
+
+  const rtcCallbacks = {
+    EndCall: () => {
+      navigation.navigate('HomeScreen');
+      setVideoCall(false);
+    },
+  };
+
   return (
     <View style={{flex: 1}}>
-      <ZegoUIKitPrebuiltCall
-        appID={1484647939}
-        appSign="Your App Sign"
-        userID={randomUserID}
-        userName={'user_' + randomUserID}
-        config={{
-          ...GROUP_VOICE_CALL_CONFIG,
-          onHangUp: () => {
-            props.navigation.navigate('HomePage');
-          },
-        }}
-      />
+      {videoCall ? (
+        <AgoraUIKit
+          connectionData={connectionData}
+          rtcCallbacks={rtcCallbacks}
+        />
+      ) : (
+        <Text onPress={() => setVideoCall(true)}>Start Call</Text>
+      )}
     </View>
   );
 };
 
 export default CallScreen;
-
-const styles = StyleSheet.create({});
