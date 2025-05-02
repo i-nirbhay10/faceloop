@@ -17,6 +17,10 @@ A cross-platform mobile application built with **React Native** and **Agora SDK*
 - Agora SDK
 - JavaScript
 
+## 📸 Screenshots
+
+https://github.com/user-attachments/assets/88f83709-b8ab-44f6-a1e4-60452c8009f7
+
 ## 📦 APK & Demo
 
 - 🔗 **APK Download**: https://drive.google.com/file/d/1GYMklQfrQTleR57jQwfQz3wrbSthdJ0w/view?usp=sharing
