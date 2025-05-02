@@ -4,3 +4,8 @@ extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autoli
 rootProject.name = 'FaceLoop'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+
+
+// ✅ Add this block for Agora (manually link if autolink fails)
+include ':agora-react-native-rtm'
+project(':agora-react-native-rtm').projectDir = new File(rootProject.projectDir, '../node_modules/agora-react-native-rtm/android')

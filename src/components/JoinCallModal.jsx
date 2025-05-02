@@ -34,7 +34,11 @@ const JoinCallModal = ({isVisible, onClose}) => {
   };
 
   return (
-    <Modal isVisible={isVisible} onBackdropPress={onClose} style={styles.modal}>
+    <Modal
+      isVisible={isVisible}
+      onBackdropPress={onClose}
+      style={styles.modal}
+      animationIn="slideInUp">
       <View style={styles.modalContent}>
         {/* Close icon button in the top-right corner */}
         <TouchableOpacity style={styles.iconClose} onPress={onClose}>

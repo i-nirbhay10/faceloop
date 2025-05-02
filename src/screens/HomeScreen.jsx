@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import StartCallModal from '../components/StartCallModal';
 import JoinCallModal from '../components/JoinCallModal';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const quotes = [
   'Stay connected, no matter the distance.',
@@ -35,7 +36,7 @@ export default function HomeScreen({navigation}) {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Image
-          source={require('../assets/iconface.png')}
+          source={require('../assets/imgface.png')}
           resizeMode="contain"
           style={styles.logo}
           tintColor={'white'}
@@ -54,14 +55,15 @@ export default function HomeScreen({navigation}) {
         }}>
         <TouchableOpacity
           style={styles.button}
-          // onPress={() => navigation.navigate('CallScreen', {channelCode})}
           onPress={() => setIsModalVisible(true)}>
+          <Icon name="videocam" size={20} color="#fff" />
           <Text style={styles.buttonText}>Start Call</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
           onPress={() => setIsjoinModalVisible(true)}>
           <Text style={styles.buttonText}>Join Meet</Text>
+          <Icon name="videocam" size={20} color="#fff" />
         </TouchableOpacity>
       </View>
       <StartCallModal
@@ -92,8 +94,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     marginBottom: 10,
   },
   appName: {
@@ -114,9 +116,12 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   },
   button: {
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
     backgroundColor: '#6A5AE0',
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     borderRadius: 20,
     elevation: 5,
   },
